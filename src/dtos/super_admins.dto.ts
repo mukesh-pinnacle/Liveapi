@@ -5,5 +5,14 @@ export class CreateSuperAdminDto {
   public email: string;
 
   @IsString()
-  public password: string;
+  public encrypted_password: string;
+
+  @IsString()
+  public display_picture: String;
+
+  @IsString()
+  public name: String;
+
+  @IsString()
+  public dispaly_name: String;
 }

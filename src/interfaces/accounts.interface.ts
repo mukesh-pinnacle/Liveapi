@@ -1,14 +1,14 @@
 export interface Account {
   _id: string;
-  name: String;
+  name: string;
   created_at: Date;
   updated_at: Date;
-  locale: Number;
-  domain: String;
-  support_email: String;
-  settings_flags: Number;
-  feature_flags: Number;
-  auto_resolve_duration: Number;
+  locale: number;
+  domain: string;
+  support_email: string;
+  settings_flags: number;
+  feature_flags: number;
+  auto_resolve_duration: number;
   limits: Object;
-  is_active: Number;
+  is_active: number;
 }
