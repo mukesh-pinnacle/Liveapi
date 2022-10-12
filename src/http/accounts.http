@@ -1,0 +1,52 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# Find All Accounts
+GET {{ baseURL }}/accounts
+
+###
+# Find Accounts By Id
+GET {{ baseURL }}/accounts/1
+
+###
+# Create Account
+POST {{ baseURL }}/accounts
+Content-Type: application/json
+
+{
+  "name": "test4",
+  "locale": 1,
+  "domain": "test.com",
+  "support_email": "support@noreply.com",
+  "settings_flags": 1,
+  "feature_flags": 1,
+  "auto_resolve_duration": 1,
+  "limits": {
+    "check": "value"
+  },
+  "is_active": 1
+}
+
+###
+# Modify Account By Id
+PUT {{ baseURL }}/accounts/1
+Content-Type: application/json
+
+{
+  "name": "test4",
+  "locale": 1,
+  "domain": "test.com",
+  "support_email": "support@noreply.com",
+  "settings_flags": 1,
+  "feature_flags": 1,
+  "auto_resolve_duration": 1,
+  "limits": {
+    "check": "value"
+  },
+  "is_active": 1
+}
+
+###
+# Delete Account By Id
+DELETE {{ baseURL }}/accounts/1
