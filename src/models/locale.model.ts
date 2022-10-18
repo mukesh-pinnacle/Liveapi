@@ -1,10 +1,12 @@
 import { model, Schema, Document } from 'mongoose';
 import { Locale } from '@interfaces/locale.interface';
+const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 
 const LocaleSchema: Schema = new Schema({
-  id: {
+  lng_id: {
     type: Number,
-    required: true,
     unique: true,
   },
   lng: {
@@ -19,7 +21,7 @@ const LocaleSchema: Schema = new Schema({
   created_at: {
     type: Date,
     required: true,
-    default: Date.now
+    default: Date
   },
   updated_at: {
     type: Date,
@@ -27,8 +29,13 @@ const LocaleSchema: Schema = new Schema({
     default: Date.now
   },
  
-  
 });
+
+LocaleSchema.plugin(AutoIncrement, {
+  id: 'LocaleSchema',
+  inc_field: 'lng_id',
+});
+//accountsSchema.plugin(mongoosePaginate);
 
 const LocleModel = model<Locale & Document>('Locale', LocaleSchema);
 

@@ -1,8 +1,8 @@
-import { IsString, IsNumber, IsObject } from 'class-validator';
+import { IsString, IsNumber, IsDateString } from 'class-validator';
 
 export class LocaleDto {
     @IsNumber()
-    public id: Number;
+    public lng_id: Number;
 
     @IsString()
     public lng: string;
@@ -11,8 +11,8 @@ export class LocaleDto {
     @IsNumber()
     public is_active: Number;
 
-    // @IsDate()
-    // public created_at: Date;
-    // public updated_at: Date;
+    @IsDateString()
+     public created_at: Date;
+     public updated_at: Date;
 
 }

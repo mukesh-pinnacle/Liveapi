@@ -2,8 +2,8 @@ import { Router } from 'express';
 import LocaleController from '@controllers/locale.controller';
 import { LocaleDto } from '@dtos/locale.dto';
 import { Routes } from '@interfaces/routes.interface';
-import validationMiddleware from '@middlewares/validation.middleware';
-import validateObjectId from '@/middlewares/validate_id.middleware';
+import validationLocalMiddleware from '@middlewares/validate_locale.middleware';
+
 
 
 class LocaleRoute implements Routes {
@@ -19,10 +19,10 @@ class LocaleRoute implements Routes {
   private initializeRoutes() {
     
     this.router.get(`${this.path}`, this.localeController.getLocale);
-    this.router.get(`${this.path}/:id`,  this.localeController.getLocaleById);
-    this.router.post(`${this.path}`, validationMiddleware(LocaleDto, 'body'), this.localeController.createLocale);
-    this.router.put(`${this.path}/:id`, [validationMiddleware(LocaleDto, 'body', true)], this.localeController.updateLocale);
-    this.router.delete(`${this.path}/:id`,  this.localeController.deleteLocale);
+    this.router.get(`${this.path}/:id`, [validationLocalMiddleware(LocaleDto, 'body', true)], this.localeController.getLocaleById);
+    this.router.post(`${this.path}`, validationLocalMiddleware(LocaleDto, 'body'), this.localeController.createLocale);
+    this.router.put(`${this.path}/:id`, [validationLocalMiddleware(LocaleDto, 'body', true)], this.localeController.updateLocale);
+    this.router.delete(`${this.path}/:id`, [validationLocalMiddleware(LocaleDto, 'body', true)], this.localeController.deleteLocale);
   }
 }
 

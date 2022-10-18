@@ -10,7 +10,7 @@ class LocaleController {
   public getLocale = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllLocaleData: Locale[] = await this.localeService.findAllLocale();
-      //console.log("findAllLocaleData == ",JSON.stringify(findAllLocaleData));
+     
 
       res.status(200).json({ data: findAllLocaleData, message: 'findAll', statusCode: 200 });
     } catch (error) {
@@ -20,10 +20,10 @@ class LocaleController {
   //get language by id
   public getLocaleById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const LocaleId: any = req.params.id;
-      console.log('inside by id == ', LocaleId);
+      const Localelng_Id: any = req.params.id;
+      console.log('inside by id == ', Localelng_Id);
 
-      const findOneLocaleData: Locale = await this.localeService.findLocaleById(LocaleId);
+      const findOneLocaleData: Locale = await this.localeService.findLocaleById(Localelng_Id);
 
       res.status(200).json({ data: findOneLocaleData, message: 'findOne', statusCode: 200 });
     } catch (error) {
