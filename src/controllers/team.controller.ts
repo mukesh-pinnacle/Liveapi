@@ -17,10 +17,10 @@ class TeamController {
   //get Teams by id
   public getTeamById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const Team_Id: any = req.params.id;
-      console.log('inside by id == ', Team_Id);
+      const _Id: string = req.params.id;
+      console.log('inside by id == ', _Id);
 
-      const findOneTeamData: Team = await this.teamService.findTeamById(Team_Id);
+      const findOneTeamData: Team = await this.teamService.findTeamById(_Id);
 
       res.status(200).json({ data: findOneTeamData, message: 'findOne', statusCode: 200 });
     } catch (error) {
@@ -45,7 +45,6 @@ class TeamController {
       const teamData: TeamDto = req.body;
       console.log('inside update  == ', teamData);
       const updateLocaleData: Team = await this.teamService.updateTeam(TeamId, teamData);
-
       res.status(200).json({ data: updateLocaleData, message: 'updated', statusCode: 200 });
     } catch (error) {
       next(error);
@@ -54,8 +53,9 @@ class TeamController {
   //delete language
   public deleteTeam = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const teamId: any = req.params.id;
-      const deleteLocaleData: Team = await this.teamService.deleteTeam(teamId);
+      const teamId: string = req.params.id;
+      const isActive : Number = parseInt(req.params.isActive);
+      const deleteLocaleData: Team = await this.teamService.deleteTeam(teamId, isActive);
       console.log(teamId);
       res.status(200).json({ data: deleteLocaleData, message: 'deleted', statusCode: 200 });
     } catch (error) {

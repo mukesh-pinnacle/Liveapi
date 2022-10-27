@@ -10,8 +10,6 @@ class LocaleController {
   public getLocale = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllLocaleData: Locale[] = await this.localeService.findAllLocale();
-     
-
       res.status(200).json({ data: findAllLocaleData, message: 'findAll', statusCode: 200 });
     } catch (error) {
       next(error);
@@ -20,9 +18,7 @@ class LocaleController {
   //get language by id
   public getLocaleById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const Localelng_Id: any = req.params.id;
-      console.log('inside by id == ', Localelng_Id);
-
+      const Localelng_Id: string = req.params.id;
       const findOneLocaleData: Locale = await this.localeService.findLocaleById(Localelng_Id);
 
       res.status(200).json({ data: findOneLocaleData, message: 'findOne', statusCode: 200 });
@@ -34,10 +30,9 @@ class LocaleController {
   public createLocale = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const localeData: LocaleDto = req.body;
-      console.log(localeData);
-
+      console.log("hello");
+      
       const createlocaleData: Locale = await this.localeService.createLocale(localeData);
-
       res.status(201).json({ data: createlocaleData, message: 'created', statusCode: 201 });
     } catch (error) {
       next(error);
@@ -46,7 +41,7 @@ class LocaleController {
   //update language
   public updateLocale = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const localeId: any = req.params.id;
+      const localeId: string = req.params.id;
       const LocaleData: LocaleDto = req.body;
       console.log('inside update  == ', localeId);
       const updateLocaleData: Locale = await this.localeService.updateLocale(localeId, LocaleData);

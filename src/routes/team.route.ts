@@ -21,7 +21,7 @@ class TeamRoute implements Routes {
     this.router.get(`${this.path}/:id`,[validationMiddleware(TeamDto, 'body', true)], this.teamController.getTeamById);
     this.router.post(`${this.path}`, [validationMiddleware(TeamDto, 'body', true)], this.teamController.createTeam);
     this.router.put(`${this.path}/:id`, [validationMiddleware(TeamDto, 'body', true)], this.teamController.updateTeam);
-    this.router.delete(`${this.path}/:id`, [validationMiddleware(TeamDto, 'body', true)], this.teamController.deleteTeam);
+    this.router.delete(`${this.path}/:id/:isActive`, [validationMiddleware(TeamDto, 'body', true)], this.teamController.deleteTeam);
   }
 }
 

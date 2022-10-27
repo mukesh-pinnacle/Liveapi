@@ -1,26 +1,22 @@
 import { model, Schema, Document } from 'mongoose';
-import { Team } from '@interfaces/team.interface';
+import { TeamMember } from '@/interfaces/team_member.interface';
 
 
 
-const TeamSchema: Schema = new Schema({
-    
-    account_id: { 
+const TeamMemberSchema: Schema = new Schema({
+   
+    account_user_id: { 
         //type:Number,
         type: Schema.Types.ObjectId, 
         ref: 'accountusers',
         required: true, 
     },
-    name: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    allow_auto_assign:{
-        type: Boolean
+    team_id: { 
+        //type:Number,
+        type: Schema.Types.ObjectId, 
+        ref: 'team',
+        required: true, 
+        unique: true,
     },
     is_active: {
         type: Number,
@@ -41,6 +37,7 @@ const TeamSchema: Schema = new Schema({
 });
 
 
-const TeamModel = model<Team & Document>('Team', TeamSchema);
 
-export default TeamModel;
+const TeamMemberModel = model<TeamMember & Document>('TeamMember', TeamMemberSchema);
+
+export default TeamMemberModel;

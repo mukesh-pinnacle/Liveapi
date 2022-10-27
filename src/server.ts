@@ -6,6 +6,7 @@ import AccountsRoute from '@routes/accounts.route';
 import SuperAdminsRoute from '@routes/super_admins.route';
 import LocaleRoute from './routes/locale.route';
 import TeamRoute from './routes/team.route';
+import TeamMemberRoute from './routes/teammember.route';
 import RolesRoute from '@routes/roles.route';
 import AccountUsersRoute from '@routes/account_users.route';
 import validateEnv from '@utils/validateEnv';
@@ -19,7 +20,8 @@ const app = new App([
     new AccountsRoute(), 
     new SuperAdminsRoute(), 
     new LocaleRoute(),
-    new TeamRoute()
+    new TeamRoute(),
+    new TeamMemberRoute()
 ]);
 
 app.listen();
