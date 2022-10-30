@@ -42,7 +42,7 @@ class LocaleService {
   // deleted record
   public async deleteLocale(localeId: number): Promise<Locale> {
     console.log(localeId);
-    const deleteLocaleById: Locale = await this.localeModel.updateOne({ lng_id: localeId }, { $set: { is_active: 0 } });
+    const deleteLocaleById: Locale = await this.localeModel.updateOne({ lng_id: localeId }, { $set: { is_active: 0 } },{ new: true, runValidators: true });
     //findOneAndDelete(localeId);
     if (!deleteLocaleById) throw new HttpException(409, "Lng doesn't exist");
     return deleteLocaleById;
