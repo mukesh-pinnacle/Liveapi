@@ -54,8 +54,9 @@ class LocaleController {
   //delete language
   public deleteLocale = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const localeId: any = req.params.id;
-      const deleteLocaleData: Locale = await this.localeService.deleteLocale(localeId);
+      const localeId: string = req.params.id;
+      const isActive: number = parseInt(req.params.isActive)
+      const deleteLocaleData: Locale = await this.localeService.deleteLocale(localeId, isActive);
       console.log(localeId);
       res.status(200).json({ data: deleteLocaleData, message: 'deleted', statusCode: 200 });
     } catch (error) {

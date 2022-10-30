@@ -16,7 +16,7 @@ const LocaleSchema: Schema = new Schema({
   created_at: {
     type: Date,
     required: true,
-    default: Date
+    default: Date.now
   },
   updated_at: {
     type: Date,

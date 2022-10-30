@@ -35,14 +35,14 @@ class LocaleService {
       if (findLocale && findLocale._id != localeId) throw new HttpException(409, `This ${localeData.lng} already exists`);
       // find other object id which have languge
     }
-    const updateLocaleById: Locale = await this.localeModel.findByIdAndUpdate({ _id: localeId }, { $set: localeData }, { new: true, runValidators: true });
+    const updateLocaleById: Locale = await this.localeModel.findByIdAndUpdate({ _id: localeId }, { $set: localeData ,updated_at: Date.now()  }, { new: true, runValidators: true });
     if (!updateLocaleById) throw new HttpException(409, "language doesn't exist");
     return updateLocaleById;
   }
   // deleted record
-  public async deleteLocale(localeId: number): Promise<Locale> {
-    console.log(localeId);
-    const deleteLocaleById: Locale = await this.localeModel.updateOne({ lng_id: localeId }, { $set: { is_active: 0 } },{ new: true, runValidators: true });
+  public async deleteLocale(localeId: string, isActive: number): Promise<Locale> {
+    console.log(localeId, isActive);
+    const deleteLocaleById: Locale = await this.localeModel.findByIdAndUpdate({ _id: localeId }, { $set: { is_active: isActive,  updated_at: Date.now()  } },{ new: true, runValidators: true });
     //findOneAndDelete(localeId);
     if (!deleteLocaleById) throw new HttpException(409, "Lng doesn't exist");
     return deleteLocaleById;
