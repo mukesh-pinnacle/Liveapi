@@ -35,28 +35,26 @@ class TeamMemberService {
         const createTeamMemData: TeamMember = await this.teamMemberModel.create(teamMemData);
         return createTeamMemData;
     }
-    //   //update record
-    //   public async updateTeam(teamId: number, teamData: TeamDto): Promise<Team> {
-    //     if (isEmpty(teamData)) throw new HttpException(400, 'Team Data is empty');
-    //     console.log('inside update service===', teamId);
-        
-        
-    //     if (teamId) {
-    //       const findteam: Team = await this.teamModel.findOne({ _id: teamId });
-    //     }
-    //     const updateTeamById: Team = await this.teamModel.updateOne({ _id: teamId }, { $set:teamData });
-    //     console.log(updateTeamById);
-    //     if (!updateTeamById) throw new HttpException(409, "Team doesn't exist");
-    //     return updateTeamById;
-    //   }
-    //   // deleted record
-    //   public async deleteTeam(localeId: number): Promise<Team> {
-    //     console.log(localeId);
-    //     const deleteTeamById: Team = await this.teamModel.updateOne( {lng_id:localeId} , { $set: { is_active: 0 } });
-    //     //findOneAndDelete(localeId);
-    //     if (!deleteTeamById) throw new HttpException(409, "Team doesn't exist");
-    //     return deleteTeamById;
-    //   }
+      //update record
+      public async updateTeamMember(teamMemId: string, teamMemData: TeamMemberDto): Promise<TeamMember> {
+        if (isEmpty(teamMemData)) throw new HttpException(400, 'Team Member Data is empty');
+        if (teamMemId) {
+          const findteamMem: TeamMember = await this.teamMemberModel.findOne({ _id: teamMemId });
+          if (findteamMem && findteamMem._id != teamMemId) throw new HttpException(409, `This ${teamMemData.team_id} already exists`);
+        }
+        const updateTeamMemById: TeamMember = await this.teamMemberModel.findByIdAndUpdate({ _id: teamMemId }, { $set:teamMemData, updated_at: Date.now()  }, { new: true, runValidators: true });
+        console.log(updateTeamMemById);
+        if (!updateTeamMemById) throw new HttpException(409, "Team Member doesn't exist");
+        return updateTeamMemById;
+      }
+      // deleted record
+      public async deleteTeamMem(TeamMemId: String, isActive:number): Promise<TeamMember> {
+        console.log(TeamMemId);
+        const deleteTeamById: TeamMember = await this.teamMemberModel.findByIdAndUpdate(TeamMemId, { $set: { is_active: isActive, updated_at: Date.now()  } }, { new: true, runValidators: true });
+        //findOneAndDelete(localeId);
+        if (!deleteTeamById) throw new HttpException(409, "Team Member doesn't exist");
+        return deleteTeamById;
+      }
 
 }
 

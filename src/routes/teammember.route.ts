@@ -20,8 +20,8 @@ class TeamMemberRoute implements Routes {
     this.router.get(`${this.path}`, [validationMiddleware(TeamMemberDto, 'body', true)],this.teamMemberController.getAllTeamMember);
     this.router.get(`${this.path}/:id`,[validationMiddleware(TeamMemberDto, 'body', true)], this.teamMemberController.getTeamMemberById);
     this.router.post(`${this.path}`, [validationMiddleware(TeamMemberDto, 'body', true)], this.teamMemberController.createTeamMember);
-  //  this.router.put(`${this.path}/:id`, [validationMiddleware(TeamMemberDto, 'body', true)], this.teamMemberController.updateTeam);
-  //  this.router.delete(`${this.path}/:id`, [validationMiddleware(TeamMemberDto, 'body', true)], this.teamMemberController.deleteTeam);
+   this.router.put(`${this.path}/:id`, [validationMiddleware(TeamMemberDto, 'body', true)], this.teamMemberController.updateTeamMember);
+    this.router.delete(`${this.path}/:id/:isActive`, [validationMiddleware(TeamMemberDto, 'body', true)], this.teamMemberController.deleteTeamMember);
   }
 }
 

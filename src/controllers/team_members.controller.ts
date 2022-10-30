@@ -39,30 +39,31 @@ class TeamMemberController {
       next(error);
     }
   };
-  // //update language
-  // public updateTeam = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const TeamId: any = req.params.id;
-  //     const teamData: TeamDto = req.body;
-  //     console.log('inside update  == ', teamData);
-  //     const updateLocaleData: Team = await this.teamService.updateTeam(TeamId, teamData);
+  //update team
+  public updateTeamMember = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const TeamMemId: any = req.params.id;
+      const teamMemData: TeamMemberDto = req.body;
+     console.log('inside update  == ', teamMemData);
+      const updateTeamMemData: TeamMember = await this.teamMemberService.updateTeamMember(TeamMemId, teamMemData);
 
-  //     res.status(200).json({ data: updateLocaleData, message: 'updated', statusCode: 200 });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
-  // //delete language
-  // public deleteTeam = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const teamId: any = req.params.id;
-  //     const deleteLocaleData: Team = await this.teamService.deleteTeam(teamId);
-  //     console.log(teamId);
-  //     res.status(200).json({ data: deleteLocaleData, message: 'deleted', statusCode: 200 });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json({ data: updateTeamMemData, message: 'updated', statusCode: 200 });
+    } catch (error) {
+      next(error);
+    }
+  };
+  //delete language
+  public deleteTeamMember = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const teamMemId: any = req.params.id;
+      const isActive: number = parseInt(req.params.isActive)
+      const deleteLocaleData: TeamMember = await this.teamMemberService.deleteTeamMem(teamMemId, isActive);
+      console.log(teamMemId);
+      res.status(200).json({ data: deleteLocaleData, message: 'deleted', statusCode: 200 });
+    } catch (error) {
+      next(error);
+    }
+  };
 
 }
 
