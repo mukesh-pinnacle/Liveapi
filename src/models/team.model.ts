@@ -20,7 +20,7 @@ const TeamSchema: Schema = new Schema({
         required: true,
     },
     allow_auto_assign:{
-        type: Boolean
+        type: Number,
     },
     is_active: {
         type: Number,
@@ -29,7 +29,7 @@ const TeamSchema: Schema = new Schema({
     created_at: {
         type: Date,
         required: true,
-        default: Date
+        default: Date.now
     },
     updated_at: {
         type: Date,

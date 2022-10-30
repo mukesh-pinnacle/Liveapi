@@ -4,7 +4,7 @@ export interface Team {
     name : string;
     description:string;
     is_active: number;
-    allow_auto_assign:boolean;
+    allow_auto_assign:number;
     created_at: Date;
     updated_at: Date;
   }

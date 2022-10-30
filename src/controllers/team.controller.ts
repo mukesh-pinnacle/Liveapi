@@ -54,7 +54,7 @@ class TeamController {
   public deleteTeam = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const teamId: string = req.params.id;
-      const isActive : Number = parseInt(req.params.isActive);
+      const isActive : number = parseInt(req.params.isActive);
       const deleteLocaleData: Team = await this.teamService.deleteTeam(teamId, isActive);
       console.log(teamId);
       res.status(200).json({ data: deleteLocaleData, message: 'deleted', statusCode: 200 });

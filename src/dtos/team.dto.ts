@@ -13,8 +13,8 @@ export class TeamDto {
     @IsString()
     public description: string;
 
-    @IsBoolean()
-    public allow_auto_assign: boolean
+    @IsNumber()
+    public allow_auto_assign: number
 
     @IsDateString()
     public created_at: Date;

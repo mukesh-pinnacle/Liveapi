@@ -42,7 +42,7 @@ class TeamService {
       if (findteam && findteam._id != teamId) throw new HttpException(409, `This ${teamData.name} already exists`);
       // find other object id which have languge
     }
-    const updateTeamById: Team = await this.teamModel.findByIdAndUpdate(teamId, { $set: teamData }, { new: true, runValidators: true });
+    const updateTeamById: Team = await this.teamModel.findByIdAndUpdate(teamId, { $set: teamData , updated_at: Date.now() }, { new: true, runValidators: true });
     console.log(updateTeamById);
     if (!updateTeamById) throw new HttpException(409, "Team doesn't exist");
     return updateTeamById;
@@ -51,7 +51,7 @@ class TeamService {
   public async deleteTeam(teamId: string, isActive: number): Promise<Team> {
     if (!Types.ObjectId.isValid(teamId)) throw new HttpException(400, 'Team Id is invalid');
     console.log(teamId);
-    const deleteTeamById: Team = await this.teamModel.findByIdAndUpdate(teamId, { $set: { is_active: isActive } }, { new: true, runValidators: true });
+    const deleteTeamById: Team = await this.teamModel.findByIdAndUpdate(teamId, { $set: { is_active: isActive, updated_at: Date.now()  } }, { new: true, runValidators: true });
     console.log(deleteTeamById);
 
     //findOneAndDelete(localeId);
