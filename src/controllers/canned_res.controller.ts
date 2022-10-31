@@ -17,18 +17,20 @@ class CannedResController {
             next(error);
         }
     };
-    //get Teams by id
+    //get canned responses by shortcode
     public getCannedRespByShort_code = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const cannedresbyaccid = req.params.accountId;
             const shortcode: string = req.params.shortcode;
-
+            console.log("hello from short code controller");
+            
             const findcannedResData: CannedRes[] = await this.cannedResService.findCannedRespByShort_code(cannedresbyaccid, shortcode);
             res.status(200).json({ data: findcannedResData, message: 'find', statusCode: 200 });
         } catch (error) {
             next(error);
         }
     };
+    
     // create Canned Responses
     public createCannedResp = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -44,10 +46,10 @@ class CannedResController {
     public updateCannedResp = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const accountid = req.params.accountId;
-            const shortcode: string = req.params.shortcode;
+            const id: string = req.params.id;
             const CannedData: CannedResponsesDto = req.body;
             console.log('inside update  == ', accountid);
-            const updateCannedData: CannedRes = await this.cannedResService.updateCannedResp(accountid, shortcode, CannedData);
+            const updateCannedData: CannedRes = await this.cannedResService.updateCannedResp(accountid, id, CannedData);
             res.status(200).json({ data: updateCannedData, message: 'updated', statusCode: 200 });
         } catch (error) {
             next(error);
@@ -57,8 +59,8 @@ class CannedResController {
     public deleteCannedRes = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const accountid = req.params.accountId;
-            const shortcode: string = req.params.shortcode;
-            const deleteCannedData: CannedRes = await this.cannedResService.deleteCannedResp(accountid, shortcode);
+            const id: string = req.params.id;
+            const deleteCannedData: CannedRes = await this.cannedResService.deleteCannedResp(accountid, id);
             res.status(200).json({ data: deleteCannedData, message: 'deleted', statusCode: 200 });
         } catch (error) {
             next(error);

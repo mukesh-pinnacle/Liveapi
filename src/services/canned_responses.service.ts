@@ -21,12 +21,13 @@ class CannedResService {
     }
     //find by caaned Responses By short_codes
     public async findCannedRespByShort_code(accountId: string, shortcode: string): Promise<CannedRes[]> {
-        console.log('inside by Short Code == ', shortcode);
+        console.log('inside by Short Code and accountid  == ', shortcode, accountId );
         if (isEmpty(shortcode)) throw new HttpException(400, 'Short_Code is empty');
         const findCannedResByShortCode: CannedRes[] = await this.cannedResModel.find({ $and: [{ account_id: accountId }, { short_code: new RegExp(shortcode, 'i') }] });
         if (!findCannedResByShortCode) throw new HttpException(409, "Short_Code doesn't exist");
         return findCannedResByShortCode;
     }
+   
     //create record
     public async createCannedResp(cannedData: CannedResponsesDto): Promise<CannedRes> {
         console.log("canned create Services", cannedData);
@@ -37,25 +38,27 @@ class CannedResService {
         return createcannedResData;
     }
     //update record
-    public async updateCannedResp(accountId: string, shortcode: string, cannedData: CannedResponsesDto): Promise<CannedRes> {
+    public async updateCannedResp(accountId: string, id: string, cannedData: CannedResponsesDto): Promise<CannedRes> {
         if (isEmpty(cannedData)) throw new HttpException(400, 'Canned Response Data is empty');
         if (!Types.ObjectId.isValid(accountId)) throw new HttpException(400, 'Account Id is invalid');
+        if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Canned Resp Id is invalid');
         console.log('inside update service===', accountId);
-        // if (accountId && shortcode) {
-        //     const findCannedRes: CannedRes = await this.cannedResModel.findOne({ $and: [{ account_id: accountId }, { short_code: shortcode }]});
-        //     if (findCannedRes && findCannedRes.short_code != shortcode) throw new HttpException(409, `This ${cannedData.short_code} already exists`);
-        //     // find other object id which have similar short code
-        // }
-        const updateCannedData: CannedRes = await this.cannedResModel.findOneAndUpdate( {$and: [{ account_id: accountId }, { short_code: shortcode }]}, { $set: cannedData, updated_at: Date.now() }, { new: true, runValidators: true });
+        if (id) {
+            const findCannResObjectid: CannedRes = await this.cannedResModel.findOne({ short_code: cannedData.short_code });
+            if (findCannResObjectid && findCannResObjectid._id != id) throw new HttpException(409, `This ${cannedData.short_code} already exists`);
+            // find other object id which have same short code
+          }
+        const updateCannedData: CannedRes = await this.cannedResModel.findOneAndUpdate( {$and: [{ account_id: accountId }, { _id: id }]}, { $set: cannedData, updated_at: Date.now() }, { new: true, runValidators: true });
         console.log(updateCannedData);
-        if (!updateCannedData) throw new HttpException(409, "short code doen't exist");
+        if (!updateCannedData) throw new HttpException(409, `short code doen't exist for the account ${accountId}`);
         return updateCannedData;
     }
       // deleted record
-      public async deleteCannedResp(accountid: string, shortcode: string): Promise<CannedRes> {
+      public async deleteCannedResp(accountid: string, id: string): Promise<CannedRes> {
         if (!Types.ObjectId.isValid(accountid)) throw new HttpException(400, 'Account id is invalid');
+        if (!Types.ObjectId.isValid(id)) throw new HttpException(400, 'Canned Response Id is invalid');
         //console.log(teamId);
-        const deleteCannedRes: CannedRes = await this.cannedResModel.findOneAndDelete({$and: [{ account_id: accountid }, { short_code: shortcode }]}, { new: true, runValidators: true });
+        const deleteCannedRes: CannedRes = await this.cannedResModel.findOneAndDelete({$and: [{ account_id: accountid }, { _id: id }]}, { new: true, runValidators: true });
         console.log(deleteCannedRes);
 
         //findOneAndDelete(localeId);

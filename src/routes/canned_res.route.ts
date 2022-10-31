@@ -20,9 +20,8 @@ class CannedResRoute implements Routes {
         this.router.get(`${this.path}/:accountId`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedResByAcID);
         this.router.get(`${this.path}/:accountId/:shortcode`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.getCannedRespByShort_code);
         this.router.post(`${this.path}`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.createCannedResp);
-         this.router.put(`${this.path}/:accountId/:shortcode`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.updateCannedResp);
-        this.router.delete(`${this.path}/:accountId/:shortcode`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.deleteCannedRes);
-        
+         this.router.put(`${this.path}/:accountId/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.updateCannedResp);
+        this.router.delete(`${this.path}/:accountId/:id`, [validationMiddleware(CannedResponsesDto, 'body', true), authMiddleware], this.cannedResController.deleteCannedRes);
     }
 }
 
