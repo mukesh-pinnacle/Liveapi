@@ -6,7 +6,7 @@ import authMiddleware from '@/middlewares/auth.middleware';
 import { LabelDto } from '@/dtos/label.dto';
 
 
-class NoteRoute implements Routes {
+class LabelRoute implements Routes {
     public path = '/label';
     public router: Router = Router();
     public labelController = new LabelController();
@@ -21,4 +21,4 @@ class NoteRoute implements Routes {
     }
 }
 
-export default NoteRoute;
+export default LabelRoute;
