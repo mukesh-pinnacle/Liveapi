@@ -1,9 +1,9 @@
 import { model, Schema, Document } from 'mongoose';
-import { Note } from '@/interfaces/note.interface';
+import { Label } from '@/interfaces/label.interface';
 
 
 
-const NoteSchema: Schema = new Schema({
+const LabelSchema: Schema = new Schema({
     
     account_id: { 
         //type:Number,
@@ -11,19 +11,19 @@ const NoteSchema: Schema = new Schema({
         ref: 'accounts',
         required: true, 
     },
-    user_id: {
-        type: Schema.Types.ObjectId, 
-        ref: 'users',
+    title: {
+        type: String, 
         required: true, 
     },
-    contact_id: {
-        type: Schema.Types.ObjectId, 
-        ref: 'contacts',
-        required: true, 
+    description: {
+        type: String, 
     },
-    content: {
+    color : {
         type: String,
         required: true,
+    },
+    show_on_sid:{
+        type:Boolean,
     },
     created_at: {
         type: Date,
@@ -40,6 +40,6 @@ const NoteSchema: Schema = new Schema({
 });
 
 
-const NoteModel = model<Note & Document>('Note', NoteSchema);
+const LabelModel = model<Label & Document>('Label', LabelSchema);
 
-export default NoteModel;
+export default LabelModel;
