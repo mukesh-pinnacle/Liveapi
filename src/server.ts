@@ -8,6 +8,7 @@ import LocaleRoute from './routes/locale.route';
 import TeamRoute from './routes/team.route';
 import TeamMemberRoute from './routes/teammember.route';
 import CannedResRoute from './routes/canned_res.route';
+import NoteRoute from './routes/notes.route';
 import RolesRoute from '@routes/roles.route';
 import AccountUsersRoute from '@routes/account_users.route';
 import validateEnv from '@utils/validateEnv';
@@ -23,7 +24,8 @@ const app = new App([
     new LocaleRoute(),
     new TeamRoute(),
     new TeamMemberRoute(),
-    new CannedResRoute()
+    new CannedResRoute(),
+    new NoteRoute()
 ]);
 
 
