@@ -6,6 +6,7 @@ import { CannedRes } from '@/interfaces/canned_response';
 
 class CannedResController {
   public cannedResService = new CannedResService();
+
  // get All Canned Responses by Account ID
   public getCannedResByAcID = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -16,19 +17,18 @@ class CannedResController {
       next(error);
     }
   };
-//   //get Teams by id
-//   public getTeamById = async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//       const _Id: string = req.params.id;
-//       console.log('inside by id == ', _Id);
-
-//       const findOneTeamData: Team = await this.teamService.findTeamById(_Id);
-
-//       res.status(200).json({ data: findOneTeamData, message: 'findOne', statusCode: 200 });
-//     } catch (error) {
-//       next(error);
-//     }
-//   };
+  //get Teams by id
+  public getCannedRespByShort_code = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const cannedresbyaccid=req.params.accountId;
+      const shortcode: string = req.params.shortcode;
+      
+      const findcannedResData: CannedRes[] = await this.cannedResService.findCannedRespByShort_code(cannedresbyaccid,shortcode);
+      res.status(200).json({ data: findcannedResData, message: 'find', statusCode: 200 });
+    } catch (error) {
+      next(error);
+    }
+  };
   // create Canned Responses
   public createCannedResp = async (req: Request, res: Response, next: NextFunction) => {
     try {

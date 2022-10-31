@@ -9,7 +9,7 @@ import { CannedResponsesDto } from '@/dtos/CannedResponses.dto';
 
 class CannedResService {
     public cannedResModel = CannedResModel;
-    // find All record
+        // find canned responses by account id
     public async findAllCannedRes(accountId: string): Promise<CannedRes[]> {
         console.log("canned services",accountId);
         
@@ -19,16 +19,14 @@ class CannedResService {
         if (!findbyAccountID) throw new HttpException(409, "Canned Responses doesn't exist");
         return findbyAccountID;
     }
-    //   //find by id
-    //   public async findTeamById(_Id: string): Promise<Team> {
-    //     if (isEmpty(_Id)) throw new HttpException(400, 'Team Id is empty');
-    //     if (!Types.ObjectId.isValid(_Id)) throw new HttpException(400, 'Team Id is invalid');
-
-    //     const findLocale: Team = await this.teamModel.findOne({ _id: _Id });
-    //     if (!findLocale) throw new HttpException(409, "Team doesn't exist");
-
-    //     return findLocale;
-    //   }
+      //find by caaned Responses By short_codes
+      public async findCannedRespByShort_code(accountId: string,shortcode: string): Promise<CannedRes[]> {
+        console.log('inside by Short Code == ', shortcode);
+        if (isEmpty(shortcode)) throw new HttpException(400, 'Short_Code is empty');
+        const findCannedResByShortCode: CannedRes[] = await this.cannedResModel.find({ $and: [{ account_id : accountId  },{ short_code  :  new RegExp(shortcode, 'i') }]});
+        if (!findCannedResByShortCode) throw new HttpException(409, "Short_Code doesn't exist");
+        return findCannedResByShortCode;
+      }
       //create record
       public async createCannedResp(cannedData: CannedResponsesDto): Promise<CannedRes> {
         console.log("canned create Services", cannedData);
