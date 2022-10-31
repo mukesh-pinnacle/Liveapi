@@ -3,12 +3,12 @@ import { Label } from "@/interfaces/label.interface";
 import LabelService from "@/services/label.service";
 import { NextFunction, Request, Response } from "express";
 class LabelController {
-    public labeService = new LabelService();
+    public labelService = new LabelService();
     //create Notes for contact 
     public createLabel = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const labelData: LabelDto = req.body;
-            const createLabelData: Label = await this.labeService.createLabel(labelData);
+            const createLabelData: Label = await this.labelService.createLabel(labelData);
             res.status(201).json({ data: createLabelData, message: 'Label created', statusCode: 201 });
         } catch (error) {
             next(error);
