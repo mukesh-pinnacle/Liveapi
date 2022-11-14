@@ -14,41 +14,51 @@ class LabelController {
             next(error);
         }
     }
-    // public getNotes = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //         const accountid = req.params.accountid;
-    //         const userid: string = req.params.userid;
-    //         const contactid: string = req.params.contactid
-    //         // console.log("hello from notes controller");
-    //         const findNoteData: Note[] = await this.noteService.findNotes(accountid, userid, contactid);
-    //         res.status(200).json({ data: findNoteData, message: 'findNotes', statusCode: 200 });
-    //     } catch (error) {
-    //         next(error);
-    //     }
-    // }
-    // // update Notes By Object ID
-    // public updateNote = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //         const id: string = req.params.id;
-    //         const noteData: NoteDto = req.body;
-    //         const updateNotes: Note = await this.noteService.updateNote(id, noteData);
-    //         res.status(200).json({ data: updateNotes, message: 'UpdateNotes', statusCode: 200 });
+    public getLabel = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const accountid = req.params.accountid;
+            const id: string = req.params.id;
+            // console.log("hello from notes controller");
+            const findNoteData: Label[] = await this.labelService.findLabel(accountid, id);
+            res.status(200).json({ data: findNoteData, message: 'findLabel', statusCode: 200 });
+        } catch (error) {
+            next(error);
+        }
+    }
 
-    //     } catch (error) {
-    //         next(error);
-    //     }
-    // }
-    // // delete Notes By Object ID
-    // public deleteNote = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //       const Id: string = req.params.id;
-    //       const deleteNoteData: Note = await this.noteService.deleteNote(Id);
-    //       console.log(Id);
-    //       res.status(200).json({ data: deleteNoteData, message: 'delete Note', statusCode: 200 });
-    //     } catch (error) {
-    //       next(error);
-    //     }
-    //   };
+    public getLabelBYAccountId = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const accountid = req.params.accountid;
+            const findNoteData: Label[] = await this.labelService.getLabelBYAccountId(accountid);
+            res.status(200).json({ data: findNoteData, message: 'findLabel', statusCode: 200 });
+        } catch (error) {
+            next(error);
+        }
+    }
+    
+    // update Notes By Object ID
+    public updateLabel = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id: string = req.params.id;
+            const labelData: LabelDto = req.body;
+            const updateLabel: Label = await this.labelService.updateLabel(id, labelData);
+            res.status(200).json({ data: updateLabel, message: 'UpdateLabel', statusCode: 200 });
+
+        } catch (error) {
+            next(error);
+        }
+    }
+    // delete Label By Object ID
+    public delete = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          const Id: string = req.params.id;
+          const deleteNoteData: Label = await this.labelService.deleteLabel(Id);
+          console.log(Id);
+          res.status(200).json({ data: deleteNoteData, message: 'deleteLabel', statusCode: 200 });
+        } catch (error) {
+          next(error);
+        }
+      };
 
 }
 export default LabelController;
